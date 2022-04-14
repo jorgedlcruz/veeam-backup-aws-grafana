@@ -103,7 +103,7 @@ for id in $(echo "$veeamVBAInstancesUrl" | jq -r '.results[].id'); do
 
         #echo "veeam_aws_restorepoints,JobType=$VMJobType,Jobid=$VMJobid,JobBackupId=$VMJobBackupId,JobTime=$VMJobTime JobSize=$VMJobSize"
         echo "Writing veeam_aws_restorepoints to InfluxDB"
-        curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/api/v2/write?org=$veeamInfluxDBOrg&bucket=$veeamInfluxDBBucket&precision=s" -H "Authorization: Token $veeamInfluxDBToken" --data-binary "veeam_aws_restorepoints,JobType=$VMJobType,Jobid=$VMJobid,JobBackupId=$VMJobBackupId,JobTime=$VMJobTime JobSize=$VMJobSize"
+        curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/api/v2/write?org=$veeamInfluxDBOrg&bucket=$veeamInfluxDBBucket&precision=s" -H "Authorization: Token $veeamInfluxDBToken" --data-binary "veeam_aws_restorepoints,JobType=$VMJobType,Jobid=$VMJobid,JobBackupId=$VMJobBackupId,JobTime=$VMJobTime,VMName=$VMName JobSize=$VMJobSize"
         
         arrayRestorePoint=$arrayRestorePoint+1
     done   
